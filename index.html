@@ -1,201 +1,503 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vishal — Data/ML Engineer</title>
-<meta name="description" content="Portfolio of Vishal — Data/ML Engineer. Machine learning pipelines, data engineering, MLOps, and backend projects.">
+<title>Vishal Rana — Senior Data Engineer</title>
+<meta name="description" content="Vishal Rana — Senior Data Engineer with 7 years building data platforms on AWS, Azure and Microsoft Fabric. ETL/ELT, PySpark, dbt, BI dashboards, MLOps.">
 <style>
-  :root{
-    --bg:#0b0f14; --surface:#111823; --surface2:#16202e;
-    --text:#e6edf3; --muted:#8b98a9; --accent:#4fc3f7; --accent2:#81d4fa;
-    --border:#1f2b3a; --chip:#0e2233;
+  :root, [data-theme="light"]{
+    --bg:#ffffff; --bg2:#f5f5f7; --surface:#ffffff;
+    --text:#1d1d1f; --muted:#6e6e73; --faint:#86868b;
+    --accent:#0071e3; --accent-hover:#0077ed;
+    --border:#d2d2d7; --hairline:#e8e8ed;
+    --tip-bg:#1d1d1f; --tip-text:#f5f5f7;
+    --shadow:0 4px 24px rgba(0,0,0,.06);
+    --shadow-lg:0 12px 40px rgba(0,0,0,.10);
+  }
+  [data-theme="dark"]{
+    --bg:#000000; --bg2:#161617; --surface:#1d1d1f;
+    --text:#f5f5f7; --muted:#a1a1a6; --faint:#86868b;
+    --accent:#2997ff; --accent-hover:#409cff;
+    --border:#424245; --hairline:#2d2d2f;
+    --tip-bg:#f5f5f7; --tip-text:#1d1d1f;
+    --shadow:0 4px 24px rgba(0,0,0,.5);
+    --shadow-lg:0 12px 40px rgba(0,0,0,.6);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+    transition:background .4s ease,color .4s ease;
+  }
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1024px;margin:0 auto;padding:0 22px}
 
-  nav{position:sticky;top:0;background:rgba(11,15,20,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:10}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-  nav .logo{font-weight:700;color:var(--text)}
-  nav .logo span{color:var(--accent)}
-  nav .links a{color:var(--muted);margin-left:22px;font-size:.95rem}
+  /* ---------- tooltips ---------- */
+  [data-tip]{position:relative}
+  [data-tip]::after{
+    content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;
+    transform:translateX(-50%) translateY(3px);
+    background:var(--tip-bg);color:var(--tip-text);
+    font-size:12px;font-weight:400;letter-spacing:-.01em;line-height:1.45;
+    padding:8px 13px;border-radius:10px;white-space:normal;width:max-content;max-width:250px;text-align:center;
+    opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:60;
+    box-shadow:var(--shadow-lg)}
+  [data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:30;
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--hairline)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:48px}
+  nav .logo{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.02em}
+  nav .links{display:flex;align-items:center;gap:26px}
+  nav .links a{color:var(--muted);font-size:13px;letter-spacing:-.01em;transition:color .2s}
   nav .links a:hover{color:var(--text);text-decoration:none}
+  .theme-btn{background:none;border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,background .2s}
+  .theme-btn:hover{color:var(--text);background:var(--bg2)}
+  .theme-btn svg{width:17px;height:17px}
 
-  header{padding:96px 0 72px;background:radial-gradient(1200px 500px at 70% -10%,rgba(79,195,247,.08),transparent)}
-  header h1{font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.15}
-  header h1 span{color:var(--accent)}
-  header p.tag{color:var(--muted);font-size:1.15rem;margin-top:16px;max-width:640px}
-  .cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:11px 22px;border-radius:8px;font-weight:600;font-size:.95rem;border:1px solid var(--border);transition:.2s}
-  .btn.primary{background:var(--accent);color:#04212f;border-color:var(--accent)}
-  .btn.primary:hover{background:var(--accent2);text-decoration:none}
-  .btn.ghost{color:var(--text)}
-  .btn.ghost:hover{border-color:var(--accent);text-decoration:none}
+  /* ---------- hero ---------- */
+  header{padding:130px 0 96px;text-align:center}
+  .eyebrow{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin-bottom:14px}
+  header h1{font-size:clamp(44px,7vw,72px);font-weight:700;letter-spacing:-.035em;line-height:1.05}
+  header .role{font-size:clamp(22px,3.4vw,32px);font-weight:600;letter-spacing:-.025em;color:var(--muted);margin-top:10px}
+  header p.tag{color:var(--muted);font-size:18px;letter-spacing:-.015em;line-height:1.55;margin:26px auto 0;max-width:640px}
+  .cta{margin-top:36px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;padding:11px 24px;border-radius:980px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover{background:var(--accent-hover);text-decoration:none;transform:scale(1.02)}
+  .btn.link{color:var(--accent);padding:11px 4px}
+  .btn.link:hover{text-decoration:underline}
+  .btn.link::after{content:" ›"}
 
-  section{padding:64px 0}
-  h2{font-size:1.7rem;margin-bottom:8px}
-  .sub{color:var(--muted);margin-bottom:36px}
+  /* ---------- stats band ---------- */
+  .band{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:52px 0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;text-align:center}
+  .stat{padding:12px;cursor:default;border-radius:14px;transition:background .25s}
+  .stat:hover{background:var(--surface)}
+  [data-theme="dark"] .stat:hover{background:var(--surface)}
+  .stat b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;color:var(--text)}
+  .stat small{color:var(--muted);font-size:13px;letter-spacing:-.01em}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;flex-direction:column;transition:.2s}
-  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .card h3{font-size:1.08rem;margin-bottom:8px}
-  .card p{color:var(--muted);font-size:.92rem;flex:1}
-  .chips{margin:14px 0 12px;display:flex;flex-wrap:wrap;gap:7px}
-  .chip{background:var(--chip);color:var(--accent2);font-size:.74rem;padding:3px 10px;border-radius:20px;border:1px solid #163449}
-  .card .repo{font-size:.9rem;font-weight:600}
-  .badge{display:inline-block;font-size:.7rem;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle;background:#152b1a;color:#7fd98a;border:1px solid #1e4527}
+  /* ---------- tabs ---------- */
+  #main{padding:88px 0 40px}
+  .section-title{text-align:center;margin-bottom:44px}
+  .section-title h2{font-size:clamp(30px,4.4vw,44px);font-weight:700;letter-spacing:-.03em}
+  .section-title p{color:var(--muted);font-size:17px;letter-spacing:-.015em;margin-top:10px}
+  .tabbar{display:inline-flex;gap:2px;background:var(--bg2);border-radius:980px;padding:4px;margin:0 auto 60px;position:relative;left:50%;transform:translateX(-50%)}
+  .tabbar button{
+    background:none;border:none;color:var(--muted);font-family:inherit;
+    font-size:14px;font-weight:500;letter-spacing:-.01em;padding:9px 22px;border-radius:980px;cursor:pointer;
+    transition:all .25s ease;white-space:nowrap}
+  .tabbar button:hover{color:var(--text)}
+  .tabbar button.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+  [data-theme="dark"] .tabbar button.active{background:#333336;color:#f5f5f7}
+  .panel{display:none;animation:fadeUp .4s ease}
+  .panel.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-  .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-  .skill{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px}
-  .skill h4{color:var(--accent);font-size:.95rem;margin-bottom:8px}
-  .skill p{color:var(--muted);font-size:.88rem}
+  /* ---------- experience ---------- */
+  .job{border-bottom:1px solid var(--hairline);padding:38px 0}
+  .job:first-child{padding-top:0}
+  .job:last-child{border-bottom:none}
+  .job .head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .job h3{font-size:21px;font-weight:600;letter-spacing:-.02em}
+  .job .co{color:var(--accent);font-weight:500;font-size:15px;letter-spacing:-.01em}
+  .job .dates{color:var(--faint);font-size:14px;letter-spacing:-.01em;white-space:nowrap;cursor:default}
+  .job .clients{margin:6px 0 14px;font-size:14px;color:var(--faint);letter-spacing:-.01em}
+  .job .clients b{color:var(--muted);font-weight:500}
+  .job ul{list-style:none;color:var(--muted);font-size:15.5px;letter-spacing:-.012em;line-height:1.6}
+  .job li{margin-bottom:10px;padding-left:20px;position:relative}
+  .job li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--border)}
+  .job li b{color:var(--text);font-weight:500}
 
-  #contact .box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:36px;text-align:center}
-  #contact .box p{color:var(--muted);max-width:520px;margin:8px auto 24px}
+  /* ---------- projects ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--bg2);border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  [data-theme="dark"] .card{background:var(--surface)}
+  .card h3{font-size:18px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card p{color:var(--muted);font-size:14.5px;letter-spacing:-.012em;line-height:1.6;flex:1}
+  .chips{margin:16px 0 14px;display:flex;flex-wrap:wrap;gap:6px}
+  .chip{background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;letter-spacing:-.005em;padding:4px 12px;border-radius:980px;border:1px solid var(--hairline);cursor:default;transition:all .2s}
+  .chip:hover{color:var(--text);border-color:var(--border)}
+  [data-theme="dark"] .chip{background:#2d2d2f;border-color:#3a3a3c}
+  .card .repo{font-size:14px;font-weight:500;letter-spacing:-.01em}
+  .card .repo:not(span)::after{content:" ›"}
+  .badge{font-size:11px;font-weight:600;letter-spacing:.02em;padding:3px 10px;border-radius:980px;background:var(--surface);color:var(--accent);border:1px solid var(--hairline);cursor:default}
+  [data-theme="dark"] .badge{background:#2d2d2f;border-color:#3a3a3c}
 
-  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:.85rem;text-align:center}
+  /* ---------- skills ---------- */
+  .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .skill{background:var(--bg2);border-radius:20px;padding:28px;transition:transform .3s ease,box-shadow .3s ease}
+  .skill:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  [data-theme="dark"] .skill{background:var(--surface)}
+  .skill h4{font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:16px}
+  .skill .chips{margin:0}
+
+  /* ---------- education ---------- */
+  .edu-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:18px}
+  @media(max-width:760px){.edu-grid{grid-template-columns:1fr}}
+  .edu{background:var(--bg2);border-radius:20px;padding:32px}
+  [data-theme="dark"] .edu{background:var(--surface)}
+  .edu h3{font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:18px;color:var(--faint);text-transform:uppercase;font-size:12px;letter-spacing:.08em}
+  .edu .deg{font-size:19px;font-weight:600;letter-spacing:-.02em}
+  .edu .inst{color:var(--muted);font-size:15px;margin-top:6px}
+  .edu .yrs{color:var(--faint);font-size:14px;margin-top:4px}
+  .certs{display:flex;flex-direction:column}
+  .cert{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:15px;letter-spacing:-.012em;color:var(--text);padding:13px 0;border-bottom:1px solid var(--hairline);cursor:default}
+  .cert:last-child{border-bottom:none}
+  .cert span{color:var(--faint);font-size:13px;white-space:nowrap}
+
+  /* ---------- contact ---------- */
+  #contact{padding:96px 0 110px;text-align:center;background:var(--bg2);border-top:1px solid var(--hairline);margin-top:72px}
+  #contact h2{font-size:clamp(30px,4.4vw,44px);font-weight:700;letter-spacing:-.03em}
+  #contact p{color:var(--muted);font-size:17px;letter-spacing:-.015em;max-width:540px;margin:14px auto 34px}
+  footer{padding:22px 0;color:var(--faint);font-size:12px;letter-spacing:-.005em;text-align:center;background:var(--bg2)}
+  footer .wrap{border-top:1px solid var(--hairline);padding-top:20px}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  @media(max-width:640px){
+    nav .links a:not(:last-of-type){display:none}
+    header{padding:90px 0 70px}
+    .tabbar{display:flex;width:100%;left:0;transform:none;overflow-x:auto}
+    .tabbar button{flex:1;padding:9px 12px}
+  }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <div class="logo">Vishal<span>.</span></div>
+    <div class="logo">Vishal Rana</div>
     <div class="links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
+      <a href="#main">Experience</a>
+      <a href="#main" onclick="openTab('projects')">Projects</a>
       <a href="#contact">Contact</a>
-      <a href="https://github.com/vishalblz10" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/vishalblz10" target="_blank" rel="noopener" data-tip="All repositories on GitHub">GitHub</a>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" data-tip="Switch appearance" aria-label="Toggle light and dark theme">
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
     </div>
   </div>
 </nav>
 
 <header>
   <div class="wrap">
-    <h1>Hi, I'm Vishal —<br><span>Data/ML Engineer</span></h1>
-    <p class="tag">I build end-to-end machine learning pipelines, data infrastructure, and production-grade backend systems — from raw data to deployed, monitored models.</p>
+    <p class="eyebrow">Senior Data Engineer</p>
+    <h1>Vishal Rana</h1>
+    <p class="role">Data platforms. Built properly.</p>
+    <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
     <div class="cta">
-      <a class="btn primary" href="#projects">View my work</a>
-      <a class="btn ghost" href="mailto:vishalblz10@gmail.com">Get in touch</a>
+      <a class="btn primary" href="#main">View my work</a>
+      <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Get in touch</a>
     </div>
   </div>
 </header>
 
-<section id="projects">
+<div class="band">
   <div class="wrap">
-    <h2>Projects</h2>
-    <p class="sub">Selected work — all open source, tested, and CI-backed on GitHub.</p>
-    <div class="grid">
-
-      <div class="card">
-        <h3>Vision MLOps Pipeline <span class="badge">CI ✓</span></h3>
-        <p>End-to-end MLOps for computer vision: PyTorch training, evaluation gates in CI, MLflow registry, ONNX export + INT8 quantization, Prometheus-instrumented serving, Kubernetes/KServe canary rollout, Terraform for EKS, and PSI/KS drift monitoring.</p>
-        <div class="chips"><span class="chip">PyTorch</span><span class="chip">MLflow</span><span class="chip">Kubernetes</span><span class="chip">Terraform</span><span class="chip">ONNX</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/vision-mlops-pipeline" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Customer Churn Predictor</h3>
-        <p>End-to-end ML pipeline predicting telecom customer churn: seeded dataset generation, scikit-learn preprocessing + gradient boosting in a single Pipeline, honest hold-out evaluation with ROC and confusion-matrix plots, all driven from a CLI.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">ML Pipeline</span><span class="chip">pytest</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/customer-churn-predictor" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Sentiment From Scratch <span class="badge">CI ✓</span></h3>
-        <p>Sentiment analysis with zero dependencies: multinomial Naive Bayes, a negation-aware tokenizer with a tiny stemmer, and a web UI served by the standard library. The test suite verifies exact fractional posteriors by hand.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">Naive Bayes</span><span class="chip">NLP</span><span class="chip">Zero deps</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/sentiment-from-scratch" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Sales ETL Pipeline</h3>
-        <p>Re-runnable extract → transform → load pipeline turning a deliberately messy retail feed (mixed dates, dirty prices, duplicates) into a tidy SQLite star schema with idempotent upserts, config-driven runs, logging, and a full test suite.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">ETL</span><span class="chip">SQLite</span><span class="chip">Star schema</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/sales-etl-pipeline" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Retail SQL Analytics <span class="badge">CI ✓</span></h3>
-        <p>A SQL analytics mart: cohort retention, RFM segmentation, growth, margin and repeat-purchase analyses in pure SQLite SQL — every query unit-tested against a tiny database whose answers were computed by hand.</p>
-        <div class="chips"><span class="chip">SQL</span><span class="chip">SQLite</span><span class="chip">Analytics</span><span class="chip">Cohorts / RFM</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/retail-sql-analytics" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Bike Share EDA <span class="badge">CI ✓</span></h3>
-        <p>Exploratory analysis of 127K bike-share trips: commute patterns, weather elasticity (rain removes 58% of demand), member vs casual behavior. The notebook is built programmatically with nbformat and executed top-to-bottom in CI — so it never rots.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">EDA</span><span class="chip">Jupyter</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/bike-share-eda" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>pdfsmith <span class="badge">CI ✓</span></h3>
-        <p>Every PDF tool in one tab — merge, split, compress, organize, convert, protect. Self-hostable, processes files entirely in memory, never stores anything. Ships with Docker Compose including LibreOffice, OCR and Ghostscript.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip">Self-hosted</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/pdfsmith" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>URL Shortener API</h3>
-        <p>Production-style REST API with FastAPI + SQLAlchemy 2.0: base62 codes and custom aliases, redirects with click analytics, expiring links, honest HTTP semantics throughout, and 32 pytest tests.</p>
-        <div class="chips"><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">REST</span><span class="chip">pytest</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/url-shortener-api" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Terminal 2048 <span class="badge">CI ✓</span></h3>
-        <p>The 2048 puzzle in your terminal — pure-Python engine with zero runtime dependencies, colored curses UI, undo, seeded games, and a pipe-driven line mode the game uses to test itself in CI.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">curses</span><span class="chip">Zero deps</span><span class="chip">CI-tested</span></div>
-        <a class="repo" href="https://github.com/vishalblz10/terminal-2048" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <h3>Algo Trading Bot (Angel One)</h3>
-        <p>Algorithmic trading system for Indian F&amp;O markets on Angel One's SmartAPI, with a live React dashboard for positions, orders and P&amp;L — and a paper-trading engine with simulated fills for zero-risk strategy validation.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">React</span><span class="chip">WebSockets</span><span class="chip">Trading API</span></div>
-        <span class="repo" style="color:var(--muted)">Private project</span>
-      </div>
-
+    <div class="stats">
+      <div class="stat reveal" data-tip="Professional experience since June 2019"><b>7+</b><small>years experience</small></div>
+      <div class="stat reveal" data-tip="Spark job tuning — 90% less data processed, higher throughput"><b>32→3 TB</b><small>pipeline volume cut</small></div>
+      <div class="stat reveal" data-tip="Production ETL reliability sustained across two years"><b>98%</b><small>production uptime</small></div>
+      <div class="stat reveal" data-tip="Open-source, tested, CI-backed projects on GitHub"><b>10</b><small>open-source projects</small></div>
+      <div class="stat reveal" data-tip="AWS ×3, Palantir Foundry, Databricks"><b>5</b><small>certifications</small></div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="skills">
+<section id="main">
   <div class="wrap">
-    <h2>Skills</h2>
-    <p class="sub">What I work with day to day.</p>
-    <div class="skills">
-      <div class="skill"><h4>Machine Learning</h4><p>scikit-learn, PyTorch, model evaluation, NLP, computer vision, classical ML from first principles</p></div>
-      <div class="skill"><h4>MLOps</h4><p>MLflow, ONNX, model serving, drift monitoring, evaluation gates, Kubernetes/KServe, Terraform</p></div>
-      <div class="skill"><h4>Data Engineering</h4><p>ETL pipelines, data quality &amp; validation, star schemas, idempotent loads, pandas</p></div>
-      <div class="skill"><h4>SQL &amp; Analytics</h4><p>SQLite/PostgreSQL, cohort analysis, RFM segmentation, exploratory data analysis</p></div>
-      <div class="skill"><h4>Backend</h4><p>Python, FastAPI, SQLAlchemy, REST API design, Docker, WebSockets</p></div>
-      <div class="skill"><h4>Engineering Practice</h4><p>pytest, CI/CD with GitHub Actions, reproducible builds, seeded/deterministic pipelines</p></div>
+
+    <div class="section-title">
+      <h2>Work</h2>
+      <p>Experience, projects, and the stack behind them.</p>
     </div>
+
+    <div class="tabbar" role="tablist">
+      <button class="active" data-panel="experience" onclick="openTab('experience')">Experience</button>
+      <button data-panel="projects" onclick="openTab('projects')">Projects</button>
+      <button data-panel="skills" onclick="openTab('skills')">Skills</button>
+      <button data-panel="education" onclick="openTab('education')">Education</button>
+    </div>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <div class="panel active" id="panel-experience">
+
+      <div class="job reveal">
+        <div class="head">
+          <h3>Senior Data Engineer / BI</h3>
+          <span class="dates" data-tip="1 year 7 months">Nov 2024 – May 2026</span>
+        </div>
+        <p class="co">CoreData Consultancy</p>
+        <p class="clients">Clients — <b>Aldar Investment</b> · <b>Collinson</b></p>
+        <ul>
+          <li><b>Sole data owner</b> for end-to-end normalisation of SQL data models — analysis, design, implementation and ongoing support — with CI/CD via GitHub across development, staging and production.</li>
+          <li>Designed scalable <b>ELT pipelines on AWS</b> (S3, Glue, Athena, Redshift), consolidating multiple source systems into clean, analytics-ready models.</li>
+          <li>Built customer-facing <b>QuickSight and Power BI dashboards</b> — calculated KPIs for conversion, close rate and revenue, drilldowns, and Row-Level Security for role-based access.</li>
+          <li>Built and optimised <b>dbt models</b> with incremental strategies, snapshots and tests; tracked pipeline and application health in Datadog and AppDynamics.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="head">
+          <h3>Senior Data Engineer</h3>
+          <span class="dates" data-tip="1 year 6 months">Jun 2023 – Nov 2024</span>
+        </div>
+        <p class="co">Indium Software</p>
+        <p class="clients">Client — <b>Ascend Materials</b></p>
+        <ul>
+          <li>Built and optimised large-scale <b>PySpark pipelines on AWS EMR</b>, processing multi-terabyte datasets from multiple source systems.</li>
+          <li>Architected ingestion, transformation and storage on AWS (S3, Glue, Athena) as a scalable <b>data lake</b>.</li>
+          <li>Tuned distributed Spark jobs to cut processed volume from <b>32 TB to 3 TB</b> while improving processing efficiency.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="head">
+          <h3>Data Engineer</h3>
+          <span class="dates" data-tip="1 year 11 months">Aug 2021 – Jun 2023</span>
+        </div>
+        <p class="co">Accenture</p>
+        <p class="clients">Client — <b>Ulster Bank</b></p>
+        <ul>
+          <li>Designed and implemented scalable <b>ETL pipelines on AWS</b>, sustaining <b>98% production uptime</b> and high data reliability.</li>
+          <li>Reduced end-to-end processing time by <b>35%</b> through improved pipeline design and query tuning.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="head">
+          <h3>Data Analyst / Data Engineer</h3>
+          <span class="dates" data-tip="2 years 3 months">Jun 2019 – Aug 2021</span>
+        </div>
+        <p class="co">Capgemini</p>
+        <p class="clients">Client — <b>British Petroleum</b></p>
+        <ul>
+          <li>Delivered insights through accessible <b>visualisations and reports</b>, enhancing cross-team collaboration.</li>
+          <li>Documented standard operating procedures and presented <b>data-driven solutions</b> to non-technical stakeholders.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ============ PROJECTS ============ -->
+    <div class="panel" id="panel-projects">
+      <div class="grid">
+
+        <div class="card reveal">
+          <h3>Vision MLOps Pipeline <span class="badge" data-tip="Continuous integration runs the full test suite on every push">CI</span></h3>
+          <p>End-to-end MLOps for computer vision: PyTorch training, evaluation gates in CI, MLflow registry, ONNX export with INT8 quantization, Prometheus-instrumented serving, Kubernetes canary rollout and drift monitoring.</p>
+          <div class="chips"><span class="chip" data-tip="Deep learning framework used for the CNN">PyTorch</span><span class="chip" data-tip="Experiment tracking and model registry">MLflow</span><span class="chip" data-tip="KServe canary deployments">Kubernetes</span><span class="chip" data-tip="Infrastructure as code for EKS">Terraform</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/vision-mlops-pipeline" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Customer Churn Predictor</h3>
+          <p>End-to-end machine learning pipeline predicting telecom churn: seeded dataset generation, scikit-learn preprocessing and gradient boosting in a single pipeline, honest hold-out evaluation with ROC and confusion-matrix plots.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip" data-tip="Preprocessing and model bundled in one pipeline">scikit-learn</span><span class="chip" data-tip="Unit tests over data, preprocessing and model I/O">pytest</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/customer-churn-predictor" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Sentiment From Scratch <span class="badge" data-tip="Continuous integration runs the full test suite on every push">CI</span></h3>
+          <p>Sentiment analysis with zero dependencies: multinomial Naive Bayes, a negation-aware tokenizer, and a web interface served by the standard library. The test suite verifies exact fractional posteriors by hand.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip" data-tip="Classifier implemented from first principles — no ML libraries">Naive Bayes</span><span class="chip">NLP</span><span class="chip" data-tip="Standard library only — nothing to install">Zero dependencies</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/sentiment-from-scratch" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Sales ETL Pipeline</h3>
+          <p>Re-runnable extract–transform–load pipeline turning a deliberately messy retail feed — mixed dates, dirty prices, duplicates — into a tidy SQLite star schema with idempotent upserts and config-driven runs.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip" data-tip="Extract, transform, load — with real data-quality handling">ETL</span><span class="chip">SQLite</span><span class="chip" data-tip="Fact and dimension tables with a daily aggregate">Star schema</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/sales-etl-pipeline" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Retail SQL Analytics <span class="badge" data-tip="Continuous integration runs the full test suite on every push">CI</span></h3>
+          <p>A SQL analytics mart: cohort retention, RFM segmentation, growth, margin and repeat-purchase analyses in pure SQLite SQL — every query unit-tested against a database whose answers were computed by hand.</p>
+          <div class="chips"><span class="chip">SQL</span><span class="chip">SQLite</span><span class="chip" data-tip="Recency, frequency, monetary customer segmentation">Cohorts / RFM</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/retail-sql-analytics" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Bike Share EDA <span class="badge" data-tip="The notebook is rebuilt and re-executed in CI so outputs never rot">CI</span></h3>
+          <p>Exploratory analysis of 127,000 bike-share trips: commute patterns, weather elasticity and member versus casual behaviour. The notebook is built programmatically and executed top to bottom in CI.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip" data-tip="Exploratory data analysis">EDA</span><span class="chip">Jupyter</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/bike-share-eda" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>pdfsmith <span class="badge" data-tip="Continuous integration runs the full test suite on every push">CI</span></h3>
+          <p>Every PDF tool in one place — merge, split, compress, organise, convert, protect. Self-hostable, processes files entirely in memory, and never stores anything.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip" data-tip="Runs on your own server — files never leave it">Self-hosted</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/pdfsmith" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>URL Shortener API</h3>
+          <p>Production-style REST API with FastAPI and SQLAlchemy 2.0: base62 codes and custom aliases, redirects with click analytics, expiring links, and honest HTTP semantics throughout.</p>
+          <div class="chips"><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">REST</span><span class="chip">pytest</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/url-shortener-api" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Terminal 2048 <span class="badge" data-tip="The game plays itself over pipes to test its own engine in CI">CI</span></h3>
+          <p>The 2048 puzzle in the terminal — a pure-Python engine with zero runtime dependencies, a colored curses interface, undo, seeded games, and a pipe-driven mode used for self-testing.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">curses</span><span class="chip">Zero dependencies</span></div>
+          <a class="repo" href="https://github.com/vishalblz10/terminal-2048" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+        <div class="card reveal">
+          <h3>Algorithmic Trading System</h3>
+          <p>Trading system for Indian F&amp;O markets on Angel One's SmartAPI, with a live React dashboard for positions, orders and P&amp;L — and a paper-trading engine with simulated fills for risk-free strategy validation.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">React</span><span class="chip" data-tip="Live tick streaming via SmartAPI WebSocket v2">WebSockets</span></div>
+          <span class="repo" style="color:var(--faint)" data-tip="Kept private — contains trading strategy logic">Private repository</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ SKILLS ============ -->
+    <div class="panel" id="panel-skills">
+      <div class="skills">
+        <div class="skill reveal"><h4>AWS</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Object storage — the data lake foundation">S3</span>
+            <span class="chip" data-tip="Serverless ETL and data catalog">Glue</span>
+            <span class="chip" data-tip="Managed Spark clusters for multi-terabyte jobs">EMR</span>
+            <span class="chip" data-tip="Serverless SQL over S3">Athena</span>
+            <span class="chip" data-tip="Columnar cloud data warehouse">Redshift</span>
+            <span class="chip" data-tip="Serverless compute and orchestration">Lambda · Step Functions</span>
+            <span class="chip" data-tip="Fine-grained data lake governance">Lake Formation</span>
+          </div>
+        </div>
+        <div class="skill reveal"><h4>Azure &amp; Microsoft Fabric</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Unified storage layer across Fabric">OneLake</span>
+            <span class="chip" data-tip="Delta Lake–backed lakehouses and warehouses">Lakehouses</span>
+            <span class="chip" data-tip="Bronze, silver and gold layering">Medallion architecture</span>
+            <span class="chip" data-tip="Orchestration for ingestion and transformation">Data Factory</span>
+            <span class="chip" data-tip="Spark-based analytics platform">Databricks</span>
+            <span class="chip" data-tip="Including SAP-to-Fabric ingestion">Azure SQL · ADLS Gen2</span>
+          </div>
+        </div>
+        <div class="skill reveal"><h4>Languages &amp; Processing</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Seven years — the daily driver">Python</span>
+            <span class="chip" data-tip="Distributed processing of multi-terabyte datasets">PySpark</span>
+            <span class="chip" data-tip="Advanced — modelling, KPIs, performance tuning">SQL</span>
+            <span class="chip" data-tip="Incremental models, snapshots and tests">dbt</span>
+            <span class="chip" data-tip="Cloud data warehouse">Snowflake</span>
+          </div>
+        </div>
+        <div class="skill reveal"><h4>Business Intelligence</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Semantic models, DAX-style measures, RLS, drilldowns">Power BI</span>
+            <span class="chip" data-tip="Customer-facing dashboards on Redshift">QuickSight</span>
+            <span class="chip" data-tip="Low-code applications on the data layer">Power Apps</span>
+            <span class="chip" data-tip="Row-Level Security — each user sees only their own data">Row-Level Security</span>
+            <span class="chip" data-tip="Conversion, close rate and revenue metrics">KPI design</span>
+          </div>
+        </div>
+        <div class="skill reveal"><h4>Platforms &amp; Practice</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Four years hands-on: Ontology, Workshop, AIP Logic, Automate">Palantir Foundry</span>
+            <span class="chip" data-tip="BigQuery and Cloud Storage data lakes">Google Cloud</span>
+            <span class="chip" data-tip="Safe deployments across development, staging and production">Git &amp; CI/CD</span>
+            <span class="chip" data-tip="Dimensional modelling, deduplication, reconciliation and validation">Data modelling</span>
+          </div>
+        </div>
+        <div class="skill reveal"><h4>Monitoring &amp; Machine Learning</h4>
+          <div class="chips">
+            <span class="chip" data-tip="Dashboard and pipeline health tracking">Datadog</span>
+            <span class="chip" data-tip="Application performance monitoring">AppDynamics</span>
+            <span class="chip" data-tip="AWS-native metrics and alerting">CloudWatch</span>
+            <span class="chip" data-tip="scikit-learn and PyTorch — see the Projects tab">ML &amp; MLOps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EDUCATION ============ -->
+    <div class="panel" id="panel-education">
+      <div class="edu-grid">
+        <div class="edu reveal">
+          <h3>Education</h3>
+          <p class="deg">B.Tech, Computer Science &amp; Engineering</p>
+          <p class="inst">Chandigarh Group of Colleges, Landran</p>
+          <p class="yrs">2015 – 2019</p>
+        </div>
+        <div class="edu reveal">
+          <h3>Certifications</h3>
+          <div class="certs">
+            <div class="cert" data-tip="Designing distributed systems on AWS">AWS Certified Solutions Architect<span>Associate</span></div>
+            <div class="cert" data-tip="Data pipelines, lakes and warehouses on AWS">AWS Certified Data Engineer<span>Associate</span></div>
+            <div class="cert" data-tip="AWS cloud fundamentals">AWS Certified Cloud Practitioner<span>Foundational</span></div>
+            <div class="cert" data-tip="Four years hands-on: Ontology, Workshop, AIP Logic, Automate">Palantir Foundry<span>Certified</span></div>
+            <div class="cert" data-tip="Spark-based lakehouse fundamentals">Databricks Essentials<span>Certified</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section id="contact">
   <div class="wrap">
-    <div class="box">
-      <h2>Let's connect</h2>
-      <p>Open to Data/ML engineering opportunities and interesting projects. The fastest way to reach me is email.</p>
-      <a class="btn primary" href="mailto:vishalblz10@gmail.com">vishalblz10@gmail.com</a>
-      &nbsp;
-      <a class="btn ghost" href="https://github.com/vishalblz10" target="_blank" rel="noopener">github.com/vishalblz10</a>
-    </div>
+    <h2>Let's work together.</h2>
+    <p>Open to senior data engineering roles and consulting — AWS, Microsoft Fabric, BI, or anywhere messy data needs to become trustworthy.</p>
+    <a class="btn primary" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Email me</a>
+    &nbsp;&nbsp;
+    <a class="btn link" href="https://github.com/vishalblz10" target="_blank" rel="noopener">View GitHub</a>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">© 2026 Vishal · Built with plain HTML &amp; CSS · Hosted on GitHub Pages</div>
+  <div class="wrap">Copyright © 2026 Vishal Rana. Built with plain HTML and CSS. Hosted on GitHub Pages.</div>
 </footer>
+
+<script>
+  // ---------- tabs ----------
+  function openTab(name){
+    document.querySelectorAll('.tabbar button').forEach(b=>b.classList.toggle('active', b.dataset.panel===name));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id==='panel-'+name));
+    document.querySelectorAll('#panel-'+name+' .reveal').forEach(el=>el.classList.add('show'));
+  }
+
+  // ---------- theme ----------
+  const root=document.documentElement;
+  function applyTheme(t){
+    root.setAttribute('data-theme',t);
+    document.getElementById('iconMoon').style.display = t==='light'?'block':'none';
+    document.getElementById('iconSun').style.display  = t==='dark' ?'block':'none';
+  }
+  function toggleTheme(){
+    const t=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    applyTheme(t);
+    try{localStorage.setItem('theme',t);}catch(e){}
+  }
+  try{
+    const saved=localStorage.getItem('theme');
+    if(saved){applyTheme(saved);}
+    else if(window.matchMedia('(prefers-color-scheme: dark)').matches){applyTheme('dark');}
+  }catch(e){}
+
+  // ---------- reveal on scroll ----------
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>
