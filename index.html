@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishal — Data/ML Engineer</title>
+<meta name="description" content="Portfolio of Vishal — Data/ML Engineer. Machine learning pipelines, data engineering, MLOps, and backend projects.">
+<style>
+  :root{
+    --bg:#0b0f14; --surface:#111823; --surface2:#16202e;
+    --text:#e6edf3; --muted:#8b98a9; --accent:#4fc3f7; --accent2:#81d4fa;
+    --border:#1f2b3a; --chip:#0e2233;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  nav{position:sticky;top:0;background:rgba(11,15,20,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:10}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .logo{font-weight:700;color:var(--text)}
+  nav .logo span{color:var(--accent)}
+  nav .links a{color:var(--muted);margin-left:22px;font-size:.95rem}
+  nav .links a:hover{color:var(--text);text-decoration:none}
+
+  header{padding:96px 0 72px;background:radial-gradient(1200px 500px at 70% -10%,rgba(79,195,247,.08),transparent)}
+  header h1{font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.15}
+  header h1 span{color:var(--accent)}
+  header p.tag{color:var(--muted);font-size:1.15rem;margin-top:16px;max-width:640px}
+  .cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:11px 22px;border-radius:8px;font-weight:600;font-size:.95rem;border:1px solid var(--border);transition:.2s}
+  .btn.primary{background:var(--accent);color:#04212f;border-color:var(--accent)}
+  .btn.primary:hover{background:var(--accent2);text-decoration:none}
+  .btn.ghost{color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent);text-decoration:none}
+
+  section{padding:64px 0}
+  h2{font-size:1.7rem;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:36px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;flex-direction:column;transition:.2s}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card h3{font-size:1.08rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.92rem;flex:1}
+  .chips{margin:14px 0 12px;display:flex;flex-wrap:wrap;gap:7px}
+  .chip{background:var(--chip);color:var(--accent2);font-size:.74rem;padding:3px 10px;border-radius:20px;border:1px solid #163449}
+  .card .repo{font-size:.9rem;font-weight:600}
+  .badge{display:inline-block;font-size:.7rem;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle;background:#152b1a;color:#7fd98a;border:1px solid #1e4527}
+
+  .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .skill{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px}
+  .skill h4{color:var(--accent);font-size:.95rem;margin-bottom:8px}
+  .skill p{color:var(--muted);font-size:.88rem}
+
+  #contact .box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:36px;text-align:center}
+  #contact .box p{color:var(--muted);max-width:520px;margin:8px auto 24px}
+
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Vishal<span>.</span></div>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/vishalblz10" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <h1>Hi, I'm Vishal —<br><span>Data/ML Engineer</span></h1>
+    <p class="tag">I build end-to-end machine learning pipelines, data infrastructure, and production-grade backend systems — from raw data to deployed, monitored models.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View my work</a>
+      <a class="btn ghost" href="mailto:vishalblz10@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="sub">Selected work — all open source, tested, and CI-backed on GitHub.</p>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Vision MLOps Pipeline <span class="badge">CI ✓</span></h3>
+        <p>End-to-end MLOps for computer vision: PyTorch training, evaluation gates in CI, MLflow registry, ONNX export + INT8 quantization, Prometheus-instrumented serving, Kubernetes/KServe canary rollout, Terraform for EKS, and PSI/KS drift monitoring.</p>
+        <div class="chips"><span class="chip">PyTorch</span><span class="chip">MLflow</span><span class="chip">Kubernetes</span><span class="chip">Terraform</span><span class="chip">ONNX</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/vision-mlops-pipeline" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Customer Churn Predictor</h3>
+        <p>End-to-end ML pipeline predicting telecom customer churn: seeded dataset generation, scikit-learn preprocessing + gradient boosting in a single Pipeline, honest hold-out evaluation with ROC and confusion-matrix plots, all driven from a CLI.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">ML Pipeline</span><span class="chip">pytest</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/customer-churn-predictor" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Sentiment From Scratch <span class="badge">CI ✓</span></h3>
+        <p>Sentiment analysis with zero dependencies: multinomial Naive Bayes, a negation-aware tokenizer with a tiny stemmer, and a web UI served by the standard library. The test suite verifies exact fractional posteriors by hand.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Naive Bayes</span><span class="chip">NLP</span><span class="chip">Zero deps</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/sentiment-from-scratch" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Sales ETL Pipeline</h3>
+        <p>Re-runnable extract → transform → load pipeline turning a deliberately messy retail feed (mixed dates, dirty prices, duplicates) into a tidy SQLite star schema with idempotent upserts, config-driven runs, logging, and a full test suite.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">ETL</span><span class="chip">SQLite</span><span class="chip">Star schema</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/sales-etl-pipeline" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Retail SQL Analytics <span class="badge">CI ✓</span></h3>
+        <p>A SQL analytics mart: cohort retention, RFM segmentation, growth, margin and repeat-purchase analyses in pure SQLite SQL — every query unit-tested against a tiny database whose answers were computed by hand.</p>
+        <div class="chips"><span class="chip">SQL</span><span class="chip">SQLite</span><span class="chip">Analytics</span><span class="chip">Cohorts / RFM</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/retail-sql-analytics" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Bike Share EDA <span class="badge">CI ✓</span></h3>
+        <p>Exploratory analysis of 127K bike-share trips: commute patterns, weather elasticity (rain removes 58% of demand), member vs casual behavior. The notebook is built programmatically with nbformat and executed top-to-bottom in CI — so it never rots.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">EDA</span><span class="chip">Jupyter</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/bike-share-eda" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>pdfsmith <span class="badge">CI ✓</span></h3>
+        <p>Every PDF tool in one tab — merge, split, compress, organize, convert, protect. Self-hostable, processes files entirely in memory, never stores anything. Ships with Docker Compose including LibreOffice, OCR and Ghostscript.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip">Self-hosted</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/pdfsmith" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>URL Shortener API</h3>
+        <p>Production-style REST API with FastAPI + SQLAlchemy 2.0: base62 codes and custom aliases, redirects with click analytics, expiring links, honest HTTP semantics throughout, and 32 pytest tests.</p>
+        <div class="chips"><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">REST</span><span class="chip">pytest</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/url-shortener-api" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Terminal 2048 <span class="badge">CI ✓</span></h3>
+        <p>The 2048 puzzle in your terminal — pure-Python engine with zero runtime dependencies, colored curses UI, undo, seeded games, and a pipe-driven line mode the game uses to test itself in CI.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">curses</span><span class="chip">Zero deps</span><span class="chip">CI-tested</span></div>
+        <a class="repo" href="https://github.com/vishalblz10/terminal-2048" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>Algo Trading Bot (Angel One)</h3>
+        <p>Algorithmic trading system for Indian F&amp;O markets on Angel One's SmartAPI, with a live React dashboard for positions, orders and P&amp;L — and a paper-trading engine with simulated fills for zero-risk strategy validation.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">React</span><span class="chip">WebSockets</span><span class="chip">Trading API</span></div>
+        <span class="repo" style="color:var(--muted)">Private project</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <p class="sub">What I work with day to day.</p>
+    <div class="skills">
+      <div class="skill"><h4>Machine Learning</h4><p>scikit-learn, PyTorch, model evaluation, NLP, computer vision, classical ML from first principles</p></div>
+      <div class="skill"><h4>MLOps</h4><p>MLflow, ONNX, model serving, drift monitoring, evaluation gates, Kubernetes/KServe, Terraform</p></div>
+      <div class="skill"><h4>Data Engineering</h4><p>ETL pipelines, data quality &amp; validation, star schemas, idempotent loads, pandas</p></div>
+      <div class="skill"><h4>SQL &amp; Analytics</h4><p>SQLite/PostgreSQL, cohort analysis, RFM segmentation, exploratory data analysis</p></div>
+      <div class="skill"><h4>Backend</h4><p>Python, FastAPI, SQLAlchemy, REST API design, Docker, WebSockets</p></div>
+      <div class="skill"><h4>Engineering Practice</h4><p>pytest, CI/CD with GitHub Actions, reproducible builds, seeded/deterministic pipelines</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="box">
+      <h2>Let's connect</h2>
+      <p>Open to Data/ML engineering opportunities and interesting projects. The fastest way to reach me is email.</p>
+      <a class="btn primary" href="mailto:vishalblz10@gmail.com">vishalblz10@gmail.com</a>
+      &nbsp;
+      <a class="btn ghost" href="https://github.com/vishalblz10" target="_blank" rel="noopener">github.com/vishalblz10</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Vishal · Built with plain HTML &amp; CSS · Hosted on GitHub Pages</div>
+</footer>
+
+</body>
+</html>
