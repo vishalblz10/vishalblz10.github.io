@@ -66,12 +66,13 @@
   .theme-btn svg{width:17px;height:17px}
 
   /* ---------- hero ---------- */
-  header{padding:72px 0 56px;text-align:center}
-  .eyebrow{font-size:15px;font-weight:700;color:var(--accent);letter-spacing:-.01em;margin-bottom:10px}
-  header h1{font-size:clamp(40px,6.4vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.06}
-  header .role{font-size:clamp(20px,3vw,28px);font-weight:600;letter-spacing:-.02em;color:var(--muted);margin-top:8px}
-  header p.tag{color:var(--muted);font-size:17px;letter-spacing:-.01em;line-height:1.55;margin:20px auto 0;max-width:620px}
-  .cta{margin-top:26px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center}
+  header{padding:76px 0 60px}
+  .hero-inner{max-width:720px}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  header h1{font-size:clamp(38px,6vw,58px);font-weight:800;letter-spacing:-.025em;line-height:1.08}
+  header .role{font-size:clamp(19px,2.6vw,25px);font-weight:600;letter-spacing:-.015em;color:var(--muted);margin-top:6px}
+  header p.tag{color:var(--muted);font-size:16.5px;letter-spacing:-.008em;line-height:1.6;margin:18px 0 0;max-width:560px}
+  .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .btn{display:inline-block;padding:11px 24px;border-radius:980px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
   .btn.primary{background:var(--accent);color:#fff}
   .btn.primary:hover{background:var(--accent-hover);text-decoration:none;transform:scale(1.02)}
@@ -81,7 +82,7 @@
 
   /* ---------- stats band ---------- */
   .band{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:32px 0}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;text-align:center}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;text-align:left}
   .stat{padding:12px;cursor:default;border-radius:14px;transition:background .25s}
   .stat:hover{background:var(--surface)}
   [data-theme="dark"] .stat:hover{background:var(--surface)}
@@ -198,13 +199,15 @@
 
 <header>
   <div class="wrap">
-    <p class="eyebrow">Senior Data Engineer</p>
-    <h1>Vishal Rana</h1>
-    <p class="role">Data platforms. Built properly.</p>
-    <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
-    <div class="cta">
-      <a class="btn primary" href="#main">View my work</a>
-      <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Get in touch</a>
+    <div class="hero-inner">
+      <span class="eyebrow">Senior Data Engineer</span>
+      <h1>Vishal Rana</h1>
+      <p class="role">Data platforms, built properly.</p>
+      <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
+      <div class="cta">
+        <a class="btn primary" href="#main">View my work</a>
+        <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Get in touch</a>
+      </div>
     </div>
   </div>
 </header>
