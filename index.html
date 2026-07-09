@@ -79,6 +79,9 @@
   .btn.link{color:var(--accent);padding:11px 4px}
   .btn.link:hover{text-decoration:underline}
   .btn.link::after{content:" ›"}
+  .btn.copy{background:none;border:1px solid var(--border);color:var(--text);font-family:inherit;cursor:pointer}
+  .btn.copy:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.copy.done{border-color:var(--accent);color:var(--accent)}
 
   /* ---------- stats band ---------- */
   .band{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:22px 0}
@@ -207,7 +210,8 @@
       <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
       <div class="cta">
         <a class="btn primary" href="#main">View my work</a>
-        <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Get in touch</a>
+        <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Get in touch</a>
+        <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
       </div>
     </div>
   </div>
@@ -469,9 +473,11 @@
   <div class="wrap">
     <h2>Let's work together.</h2>
     <p>Open to senior data engineering roles and consulting — AWS, Microsoft Fabric, BI, or anywhere messy data needs to become trustworthy.</p>
-    <a class="btn primary" href="mailto:vishalblz10@gmail.com" data-tip="vishalblz10@gmail.com">Email me</a>
-    &nbsp;&nbsp;
-    <a class="btn link" href="https://github.com/vishalblz10" target="_blank" rel="noopener">View GitHub</a>
+    <div class="cta" style="justify-content:center">
+      <a class="btn primary" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Email me</a>
+      <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
+      <a class="btn link" href="https://github.com/vishalblz10" target="_blank" rel="noopener">View GitHub</a>
+    </div>
   </div>
 </section>
 
@@ -504,6 +510,18 @@
     if(saved){applyTheme(saved);}
     else if(window.matchMedia('(prefers-color-scheme: dark)').matches){applyTheme('dark');}
   }catch(e){}
+
+  // ---------- copy email ----------
+  function copyEmail(btn){
+    const email='vishalblz10@gmail.com';
+    const done=()=>{const t=btn.textContent;btn.textContent='Copied';btn.classList.add('done');setTimeout(()=>{btn.textContent=t;btn.classList.remove('done');},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(done).catch(()=>fallbackCopy(email,done));}
+    else{fallbackCopy(email,done);}
+  }
+  function fallbackCopy(text,cb){
+    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+  }
 
   // ---------- tooltips: focusable so they work on tap/keyboard too ----------
   document.querySelectorAll('[data-tip]').forEach(el=>{if(!el.hasAttribute('tabindex')&&el.tagName!=='A'&&el.tagName!=='BUTTON')el.setAttribute('tabindex','0');});
