@@ -61,13 +61,13 @@
   nav .links{display:flex;align-items:center;gap:26px}
   nav .links a{color:var(--muted);font-size:13px;letter-spacing:-.01em;transition:color .2s}
   nav .links a:hover{color:var(--text);text-decoration:none}
-  .theme-btn{background:none;border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,background .2s}
+  .theme-btn{background:none;border:none;color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,background .2s}
   .theme-btn:hover{color:var(--text);background:var(--bg2)}
   .theme-btn svg{width:17px;height:17px}
 
   /* ---------- hero: fills first screen (nav + hero + stats = one viewport) ---------- */
   .cover{display:flex;flex-direction:column;min-height:calc(100vh - 48px);min-height:calc(100dvh - 48px)}
-  header{flex:1;display:flex;align-items:center;padding:40px 0}
+  header{flex:1;display:flex;align-items:flex-start;padding:clamp(28px,7vh,72px) 0 40px}
   header .wrap{width:100%}
   .hero-inner{max-width:820px}
   .eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
@@ -75,7 +75,7 @@
   header .role{font-size:clamp(19px,2.8vw,30px);font-weight:600;letter-spacing:-.015em;color:var(--muted);margin-top:8px}
   header p.tag{color:var(--muted);font-size:clamp(15.5px,1.4vw,18px);letter-spacing:-.008em;line-height:1.6;margin:20px 0 0;max-width:640px}
   .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-block;padding:11px 24px;border-radius:980px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
+  .btn{display:inline-block;padding:11px 24px;border-radius:10px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
   .btn.primary{background:var(--accent);color:#fff}
   .btn.primary:hover{background:var(--accent-hover);text-decoration:none;transform:scale(1.02)}
   .btn.link{color:var(--accent);padding:11px 4px}
@@ -88,7 +88,7 @@
   /* ---------- stats band ---------- */
   .band{background:var(--bg2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:22px 0}
   .stats{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px}
-  .stat{padding:6px 10px;cursor:help;border-radius:12px;transition:background .25s}
+  .stat{padding:6px 10px;cursor:help;border-radius:10px;transition:background .25s}
   .stat:hover{background:var(--surface)}
   [data-theme="dark"] .stat:hover{background:var(--surface)}
   .stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--text)}
@@ -101,10 +101,10 @@
   .section-title h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.025em}
   .section-title p{color:var(--muted);font-size:16px;letter-spacing:-.01em;margin-top:6px}
   .tabwrap{display:flex;justify-content:center;margin-bottom:36px}
-  .tabbar{display:inline-flex;gap:2px;background:var(--bg2);border-radius:980px;padding:4px}
+  .tabbar{display:inline-flex;gap:2px;background:var(--bg2);border-radius:12px;padding:4px}
   .tabbar button{
     background:none;border:none;color:var(--muted);font-family:inherit;
-    font-size:14px;font-weight:600;letter-spacing:-.01em;padding:8px 18px;border-radius:980px;cursor:pointer;
+    font-size:14px;font-weight:600;letter-spacing:-.01em;padding:8px 18px;border-radius:9px;cursor:pointer;
     transition:all .25s ease;white-space:nowrap}
   .tabbar button:hover{color:var(--text)}
   .tabbar button.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
@@ -131,23 +131,23 @@
 
   /* ---------- projects ---------- */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
-  .card{background:var(--bg2);border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+  .card{background:var(--bg2);border-radius:14px;padding:30px 28px;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   [data-theme="dark"] .card{background:var(--surface)}
   .card h3{font-size:18px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .card p{color:var(--muted);font-size:14.5px;letter-spacing:-.012em;line-height:1.6;flex:1}
   .chips{margin:16px 0 14px;display:flex;flex-wrap:wrap;gap:6px}
-  .chip{background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;letter-spacing:-.005em;padding:4px 12px;border-radius:980px;border:1px solid var(--hairline);cursor:default;transition:all .2s}
+  .chip{background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;letter-spacing:-.005em;padding:4px 12px;border-radius:7px;border:1px solid var(--hairline);cursor:default;transition:all .2s}
   .chip:hover{color:var(--text);border-color:var(--border)}
   [data-theme="dark"] .chip{background:#2d2d2f;border-color:#3a3a3c}
   .card .repo{font-size:14px;font-weight:500;letter-spacing:-.01em}
   .card .repo:not(span)::after{content:" ›"}
-  .badge{font-size:11px;font-weight:600;letter-spacing:.02em;padding:3px 10px;border-radius:980px;background:var(--surface);color:var(--accent);border:1px solid var(--hairline);cursor:default}
+  .badge{font-size:11px;font-weight:600;letter-spacing:.02em;padding:3px 10px;border-radius:6px;background:var(--surface);color:var(--accent);border:1px solid var(--hairline);cursor:default}
   [data-theme="dark"] .badge{background:#2d2d2f;border-color:#3a3a3c}
 
   /* ---------- skills ---------- */
   .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-  .skill{background:var(--bg2);border-radius:20px;padding:28px;transition:transform .3s ease,box-shadow .3s ease}
+  .skill{background:var(--bg2);border-radius:14px;padding:28px;transition:transform .3s ease,box-shadow .3s ease}
   .skill:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   [data-theme="dark"] .skill{background:var(--surface)}
   .skill h4{font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:16px}
@@ -156,7 +156,7 @@
   /* ---------- education ---------- */
   .edu-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:18px}
   @media(max-width:760px){.edu-grid{grid-template-columns:1fr}}
-  .edu{background:var(--bg2);border-radius:20px;padding:32px}
+  .edu{background:var(--bg2);border-radius:14px;padding:32px}
   [data-theme="dark"] .edu{background:var(--surface)}
   .edu h3{font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:18px;color:var(--faint);text-transform:uppercase;font-size:12px;letter-spacing:.08em}
   .edu .deg{font-size:19px;font-weight:600;letter-spacing:-.02em}
