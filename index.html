@@ -108,6 +108,8 @@
   .client span{display:none;font-size:16px;font-weight:800;letter-spacing:-.015em;color:var(--text);white-space:nowrap}
   .client.textmark span,.client.noimg span{display:inline}
   .client.noimg img{display:none}
+  .client img+span{margin-left:0}
+  .client.iconized span{display:inline;margin-left:9px}
 
   /* ---------- tabs ---------- */
   #main{padding:52px 0 32px}
@@ -288,13 +290,13 @@
     <p class="label">Companies I've worked with</p>
     <div class="client-wall">
       <div class="client" data-tip="Data & analytics engagement"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coca-Cola_logo.svg?width=300" alt="Coca-Cola" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Coca-Cola</span></div>
-      <div class="client" data-tip="Visualisation & reporting — via Capgemini"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BP_Logo_Vector.svg?width=200" alt="BP" loading="lazy" style="height:40px" onerror="this.parentElement.classList.add('noimg')"><span>British Petroleum</span></div>
+      <div class="client" data-tip="Visualisation & reporting — via Capgemini"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BP_Logo_Vector.svg?width=200" alt="BP" loading="lazy" style="height:40px" onerror="fallbackLogo(this,'bp.com')"><span>British Petroleum</span></div>
       <div class="client" data-tip="Scalable ETL on AWS, 98% uptime — via Accenture"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ulsterbank_logo.gif" alt="Ulster Bank" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Ulster Bank Ireland</span></div>
-      <div class="client textmark" data-tip="Multi-terabyte PySpark pipelines — via Indium"><span>Ascend Materials</span></div>
+      <div class="client" data-tip="Multi-terabyte PySpark pipelines — via Indium"><img src="https://www.google.com/s2/favicons?domain=ascendmaterials.com&sz=128" alt="Ascend Materials" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Ascend Materials</span></div>
       <div class="client" data-tip="SQL data model normalisation — via CoreData"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Aldar_Properties_Logo_2016.png?width=300" alt="Aldar" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Aldar Investment</span></div>
       <div class="client" data-tip="Data & analytics engagement"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Heineken_logo.svg?width=300" alt="Heineken" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Heineken</span></div>
-      <div class="client textmark" data-tip="Data & analytics engagement"><span>Canarey</span></div>
-      <div class="client textmark" data-tip="Data & analytics engagement"><span>Petrostat</span></div>
+      <div class="client" data-tip="Data & analytics engagement"><img src="https://www.google.com/s2/favicons?domain=canaery.com&sz=128" alt="Canaery" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Canaery</span></div>
+      <div class="client" data-tip="Data & analytics engagement"><img src="https://www.google.com/s2/favicons?domain=petrostrat.com&sz=128" alt="PetroStrat" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>PetroStrat</span></div>
     </div>
   </div>
 </section>
@@ -610,6 +612,16 @@
     if(saved){applyTheme(saved);}
     else if(window.matchMedia('(prefers-color-scheme: dark)').matches){applyTheme('dark');}
   }catch(e){}
+
+  // ---------- client logo fallback: Commons file -> site favicon -> wordmark ----------
+  function fallbackLogo(img,domain){
+    img.onerror=function(){img.parentElement.classList.add('noimg');};
+    img.src='https://www.google.com/s2/favicons?domain='+domain+'&sz=128';
+    img.style.height='32px';
+    img.parentElement.classList.add('iconized');
+  }
+  // favicon-based logos are small squares — show the name beside them
+  document.querySelectorAll('.client img[src*="s2/favicons"]').forEach(img=>img.parentElement.classList.add('iconized'));
 
   // ---------- copy email ----------
   function copyEmail(btn){
