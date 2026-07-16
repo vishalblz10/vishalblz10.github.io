@@ -77,6 +77,8 @@
   header .role{font-size:clamp(19px,2.8vw,30px);font-weight:600;letter-spacing:-.015em;color:var(--muted);margin-top:8px}
   header p.tag{color:var(--muted);font-size:clamp(15.5px,1.4vw,18px);letter-spacing:-.008em;line-height:1.6;margin:20px 0 0;max-width:640px}
   .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta-right{margin-left:auto;display:flex;gap:14px;align-items:center}
+  @media(max-width:640px){.cta-right{margin-left:0}}
   .btn{display:inline-block;padding:11px 24px;border-radius:10px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
   .btn.primary{background:var(--accent);color:#fff}
   .btn.primary:hover{background:var(--accent-hover);text-decoration:none;transform:scale(1.02)}
@@ -246,8 +248,10 @@
       <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
       <div class="cta">
         <a class="btn primary" href="#main">View my work</a>
-        <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Get in touch</a>
-        <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
+        <span class="cta-right">
+          <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Get in touch</a>
+          <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
+        </span>
       </div>
     </div>
     <svg class="hero-art" viewBox="0 0 420 360" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
