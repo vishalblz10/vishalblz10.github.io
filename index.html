@@ -101,11 +101,10 @@
   .clients{padding:38px 0;text-align:center;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:14px}
   .clients .label{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:28px}
   .client-wall{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px 52px}
-  .client{display:flex;align-items:center;cursor:default;
-    filter:grayscale(1);opacity:.5;transition:filter .3s ease,opacity .3s ease}
-  .client:hover{filter:none;opacity:1}
-  .client img{height:30px;width:auto;max-width:150px;object-fit:contain;display:block}
-  [data-theme="dark"] .client img{filter:invert(1) hue-rotate(180deg)}
+  .client{display:flex;align-items:center;cursor:default;opacity:.82;transition:opacity .3s ease,transform .3s ease}
+  .client:hover{opacity:1;transform:translateY(-2px)}
+  .client img{height:32px;width:auto;max-width:160px;object-fit:contain;display:block}
+  [data-theme="dark"] .client img{background:#fff;padding:5px 9px;border-radius:8px;height:38px}
   .client span{display:none;font-size:16px;font-weight:800;letter-spacing:-.015em;color:var(--text);white-space:nowrap}
   .client.textmark span,.client.noimg span{display:inline}
   .client.noimg img{display:none}
@@ -289,10 +288,10 @@
     <p class="label">Companies I've worked with</p>
     <div class="client-wall">
       <div class="client" data-tip="Data & analytics engagement"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coca-Cola_logo.svg?width=300" alt="Coca-Cola" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Coca-Cola</span></div>
-      <div class="client" data-tip="Visualisation & reporting — via Capgemini"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BP_Helios_logo.svg?width=200" alt="BP" loading="lazy" style="height:36px" onerror="this.parentElement.classList.add('noimg')"><span>British Petroleum</span></div>
-      <div class="client" data-tip="Scalable ETL on AWS, 98% uptime — via Accenture"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ulster_Bank_logo.svg?width=300" alt="Ulster Bank" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Ulster Bank Ireland</span></div>
+      <div class="client" data-tip="Visualisation & reporting — via Capgemini"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BP_Logo_Vector.svg?width=200" alt="BP" loading="lazy" style="height:40px" onerror="this.parentElement.classList.add('noimg')"><span>British Petroleum</span></div>
+      <div class="client" data-tip="Scalable ETL on AWS, 98% uptime — via Accenture"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ulsterbank_logo.gif" alt="Ulster Bank" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Ulster Bank Ireland</span></div>
       <div class="client textmark" data-tip="Multi-terabyte PySpark pipelines — via Indium"><span>Ascend Materials</span></div>
-      <div class="client" data-tip="SQL data model normalisation — via CoreData"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Aldar_Properties_logo.svg?width=300" alt="Aldar" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Aldar Investment</span></div>
+      <div class="client" data-tip="SQL data model normalisation — via CoreData"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Aldar_Properties_Logo_2016.png?width=300" alt="Aldar" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Aldar Investment</span></div>
       <div class="client" data-tip="Data & analytics engagement"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Heineken_logo.svg?width=300" alt="Heineken" loading="lazy" onerror="this.parentElement.classList.add('noimg')"><span>Heineken</span></div>
       <div class="client textmark" data-tip="Data & analytics engagement"><span>Canarey</span></div>
       <div class="client textmark" data-tip="Data & analytics engagement"><span>Petrostat</span></div>
