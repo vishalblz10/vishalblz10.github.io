@@ -77,8 +77,31 @@
   header .role{font-size:clamp(19px,2.8vw,30px);font-weight:600;letter-spacing:-.015em;color:var(--muted);margin-top:8px}
   header p.tag{color:var(--muted);font-size:clamp(15.5px,1.4vw,18px);letter-spacing:-.008em;line-height:1.6;margin:20px 0 0;max-width:640px}
   .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .cta-right{margin-left:auto;display:flex;gap:14px;align-items:center}
-  @media(max-width:640px){.cta-right{margin-left:0}}
+  .btn.ghost{background:none;border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:15px;cursor:pointer}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ---------- contact modal ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex;animation:fadeIn .25s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--bg);border:1px solid var(--hairline);border-radius:16px;box-shadow:var(--shadow-lg);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:30px;animation:fadeUp .3s ease}
+  .modal h3{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+  .modal .sub2{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .field{margin-bottom:15px}
+  .frow{display:flex;gap:12px}
+  .frow .field{flex:1}
+  .field label{display:block;font-size:13px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;color:var(--text)}
+  .field label em{color:var(--faint);font-weight:500;font-style:normal;font-size:12px}
+  .field input[type=text],.field input[type=email],.field textarea{
+    width:100%;background:var(--bg2);border:1px solid var(--hairline);border-radius:9px;padding:10px 13px;
+    font-family:inherit;font-size:14.5px;color:var(--text);transition:border-color .2s}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+  .field input[type=file]{width:100%;font-size:13px;color:var(--muted);font-family:inherit}
+  .field input[type=file]::file-selector-button{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:7px 14px;margin-right:10px;font-family:inherit;font-size:13px;font-weight:600;color:var(--text);cursor:pointer}
+  .modal .actions{display:flex;gap:12px;justify-content:flex-end;margin-top:22px}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--tip-bg);color:var(--tip-text);font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;box-shadow:var(--shadow-lg);z-index:110;display:none}
+  .toast.show{display:block;animation:fadeUp .3s ease}
   .btn{display:inline-block;padding:11px 24px;border-radius:10px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:all .25s ease}
   .btn.primary{background:var(--accent);color:#fff}
   .btn.primary:hover{background:var(--accent-hover);text-decoration:none;transform:scale(1.02)}
@@ -248,10 +271,7 @@
       <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
       <div class="cta">
         <a class="btn primary" href="#main">View my work</a>
-        <span class="cta-right">
-          <a class="btn link" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Get in touch</a>
-          <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
-        </span>
+        <button class="btn ghost" onclick="openContact()" data-tip="Send me a message — no email app needed">Get in touch</button>
       </div>
     </div>
     <svg class="hero-art" viewBox="0 0 420 360" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -583,8 +603,7 @@
     <h2>Let's work together.</h2>
     <p>Open to senior data engineering roles and consulting — AWS, Microsoft Fabric, BI, or anywhere messy data needs to become trustworthy.</p>
     <div class="cta" style="justify-content:center">
-      <a class="btn primary" href="mailto:vishalblz10@gmail.com" data-tip="Opens your email app">Email me</a>
-      <button class="btn copy" onclick="copyEmail(this)" data-tip="Copy vishalblz10@gmail.com to clipboard">Copy email</button>
+      <button class="btn primary" onclick="openContact()" data-tip="Send me a message — no email app needed">Get in touch</button>
       <a class="btn link" href="https://github.com/vishalblz10" target="_blank" rel="noopener">View GitHub</a>
     </div>
   </div>
@@ -593,6 +612,33 @@
 <footer>
   <div class="wrap">Copyright © 2026 Vishal Rana. Built with plain HTML and CSS. Hosted on GitHub Pages.</div>
 </footer>
+
+<!-- ---------- contact modal ---------- -->
+<div class="modal-overlay" id="contactOverlay" onclick="if(event.target===this)closeContact()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+    <h3 id="cmTitle">Get in touch</h3>
+    <p class="sub2">Fill this in and it lands straight in my inbox.</p>
+    <form id="contactForm" action="https://formsubmit.co/vishalblz10@gmail.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Portfolio contact — vishalblz10.github.io">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://vishalblz10.github.io/?sent=1">
+      <div class="frow">
+        <div class="field"><label for="cfName">Name</label><input type="text" id="cfName" name="Name" required autocomplete="given-name"></div>
+        <div class="field"><label for="cfSurname">Surname</label><input type="text" id="cfSurname" name="Surname" required autocomplete="family-name"></div>
+      </div>
+      <div class="field"><label for="cfEmail">Email <em>— so I can reply</em></label><input type="email" id="cfEmail" name="email" required autocomplete="email"></div>
+      <div class="field"><label for="cfOrg">Organisation <em>— optional</em></label><input type="text" id="cfOrg" name="Organisation" autocomplete="organization"></div>
+      <div class="field"><label for="cfDesc">Description</label><textarea id="cfDesc" name="Description" required placeholder="What would you like to discuss?"></textarea></div>
+      <div class="field"><label for="cfFile">Attachment <em>— optional</em></label><input type="file" id="cfFile" name="attachment"></div>
+      <div class="actions">
+        <button type="button" class="btn ghost" onclick="closeContact()">Close</button>
+        <button type="submit" class="btn primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast">Message sent — I'll get back to you soon.</div>
 
 <script>
   // ---------- tabs ----------
@@ -630,16 +676,15 @@
   // favicon-based logos are small squares — show the name beside them
   document.querySelectorAll('.client img[src*="s2/favicons"]').forEach(img=>img.parentElement.classList.add('iconized'));
 
-  // ---------- copy email ----------
-  function copyEmail(btn){
-    const email='vishalblz10@gmail.com';
-    const done=()=>{const t=btn.textContent;btn.textContent='Copied';btn.classList.add('done');setTimeout(()=>{btn.textContent=t;btn.classList.remove('done');},1800);};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(done).catch(()=>fallbackCopy(email,done));}
-    else{fallbackCopy(email,done);}
-  }
-  function fallbackCopy(text,cb){
-    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
-    document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+  // ---------- contact modal ----------
+  function openContact(){document.getElementById('contactOverlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('cfName').focus(),80);}
+  function closeContact(){document.getElementById('contactOverlay').classList.remove('open');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContact();});
+  // success toast after redirect back from form service
+  if(new URLSearchParams(location.search).get('sent')==='1'){
+    const t=document.getElementById('toast');t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),5000);
+    history.replaceState(null,'',location.pathname);
   }
 
   // ---------- tooltips: focusable so they work on tap/keyboard too ----------
