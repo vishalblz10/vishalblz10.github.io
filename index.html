@@ -124,9 +124,11 @@
   .job ul{max-width:960px}
   .job:first-child{padding-top:0}
   .job:last-child{border-bottom:none}
-  .job .head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-  .job h3{font-size:21px;font-weight:600;letter-spacing:-.02em}
-  .job .co{color:var(--accent);font-weight:500;font-size:15px;letter-spacing:-.01em}
+  .job .head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+  .hleft{display:flex;align-items:center;gap:15px}
+  .org-logo{width:48px;height:48px;border-radius:11px;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:default}
+  .job h3{font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1.25}
+  .job .co{color:var(--accent);font-weight:600;font-size:14.5px;letter-spacing:-.01em;margin-top:1px}
   .job .dates{color:var(--faint);font-size:14px;letter-spacing:-.01em;white-space:nowrap;cursor:default}
   .job .clients{margin:6px 0 14px;font-size:14px;color:var(--faint);letter-spacing:-.01em}
   .job .clients b{color:var(--muted);font-weight:500}
@@ -169,9 +171,13 @@
   .edu .inst{color:var(--muted);font-size:15px;margin-top:6px}
   .edu .yrs{color:var(--faint);font-size:14px;margin-top:4px}
   .certs{display:flex;flex-direction:column}
-  .cert{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:15px;letter-spacing:-.012em;color:var(--text);padding:13px 0;border-bottom:1px solid var(--hairline);cursor:default}
+  .cert{display:flex;align-items:center;gap:13px;font-size:15px;letter-spacing:-.012em;color:var(--text);padding:11px 0;border-bottom:1px solid var(--hairline);cursor:default}
   .cert:last-child{border-bottom:none}
-  .cert span{color:var(--faint);font-size:13px;white-space:nowrap}
+  .cert .name{flex:1}
+  .cert .lvl{color:var(--faint);font-size:13px;white-space:nowrap}
+  .cert-logo{width:34px;height:34px;border-radius:8px;color:#fff;font-weight:800;font-size:10.5px;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .cert-logo.pltr{background:#101113;border:1px solid var(--border)}
+  [data-theme="dark"] .cert-logo.pltr{background:#2a2a2d}
 
   /* ---------- contact ---------- */
   #contact{padding:60px 0 68px;text-align:center;background:var(--bg2);border-top:1px solid var(--hairline);margin-top:48px}
@@ -293,10 +299,12 @@
 
       <div class="job reveal">
         <div class="head">
-          <h3>Senior Data Engineer / BI</h3>
+          <div class="hleft">
+            <span class="org-logo" style="background:#12406a" data-tip="CoreData Consultancy">CD</span>
+            <div><h3>Senior Data Engineer / BI</h3><p class="co">CoreData Consultancy</p></div>
+          </div>
           <span class="dates" data-tip="1 year 7 months">Nov 2024 – May 2026</span>
         </div>
-        <p class="co">CoreData Consultancy</p>
         <p class="clients">Clients — <b>Aldar Investment</b> · <b>Collinson</b></p>
         <ul>
           <li><b>Sole data owner</b> for end-to-end normalisation of SQL data models — analysis, design, implementation and ongoing support — with CI/CD via GitHub across development, staging and production.</li>
@@ -308,10 +316,12 @@
 
       <div class="job reveal">
         <div class="head">
-          <h3>Senior Data Engineer</h3>
+          <div class="hleft">
+            <span class="org-logo" style="background:#00857c" data-tip="Indium Software">IN</span>
+            <div><h3>Senior Data Engineer</h3><p class="co">Indium Software</p></div>
+          </div>
           <span class="dates" data-tip="1 year 6 months">Jun 2023 – Nov 2024</span>
         </div>
-        <p class="co">Indium Software</p>
         <p class="clients">Client — <b>Ascend Materials</b></p>
         <ul>
           <li>Built and optimised large-scale <b>PySpark pipelines on AWS EMR</b>, processing multi-terabyte datasets from multiple source systems.</li>
@@ -322,10 +332,12 @@
 
       <div class="job reveal">
         <div class="head">
-          <h3>Data Engineer</h3>
+          <div class="hleft">
+            <span class="org-logo" style="background:#a100ff;font-size:22px;font-weight:800" data-tip="Accenture">&gt;</span>
+            <div><h3>Data Engineer</h3><p class="co">Accenture</p></div>
+          </div>
           <span class="dates" data-tip="1 year 11 months">Aug 2021 – Jun 2023</span>
         </div>
-        <p class="co">Accenture</p>
         <p class="clients">Client — <b>Ulster Bank</b></p>
         <ul>
           <li>Designed and implemented scalable <b>ETL pipelines on AWS</b>, sustaining <b>98% production uptime</b> and high data reliability.</li>
@@ -335,10 +347,12 @@
 
       <div class="job reveal">
         <div class="head">
-          <h3>Data Analyst / Data Engineer</h3>
+          <div class="hleft">
+            <span class="org-logo" style="background:#0070ad" data-tip="Capgemini">C</span>
+            <div><h3>Data Analyst / Data Engineer</h3><p class="co">Capgemini</p></div>
+          </div>
           <span class="dates" data-tip="2 years 3 months">Jun 2019 – Aug 2021</span>
         </div>
-        <p class="co">Capgemini</p>
         <p class="clients">Client — <b>British Petroleum</b></p>
         <ul>
           <li>Delivered insights through accessible <b>visualisations and reports</b>, enhancing cross-team collaboration.</li>
@@ -514,11 +528,11 @@
         <div class="edu reveal">
           <h3>Certifications</h3>
           <div class="certs">
-            <div class="cert" data-tip="Designing distributed systems on AWS">AWS Certified Solutions Architect<span>Associate</span></div>
-            <div class="cert" data-tip="Data pipelines, lakes and warehouses on AWS">AWS Certified Data Engineer<span>Associate</span></div>
-            <div class="cert" data-tip="AWS cloud fundamentals">AWS Certified Cloud Practitioner<span>Foundational</span></div>
-            <div class="cert" data-tip="Four years hands-on: Ontology, Workshop, AIP Logic, Automate">Palantir Foundry<span>Certified</span></div>
-            <div class="cert" data-tip="Spark-based lakehouse fundamentals">Databricks Essentials<span>Certified</span></div>
+            <div class="cert" data-tip="Designing distributed systems on AWS"><span class="cert-logo" style="background:#ff9900">AWS</span><span class="name">AWS Certified Solutions Architect</span><span class="lvl">Associate</span></div>
+            <div class="cert" data-tip="Data pipelines, lakes and warehouses on AWS"><span class="cert-logo" style="background:#ff9900">AWS</span><span class="name">AWS Certified Data Engineer</span><span class="lvl">Associate</span></div>
+            <div class="cert" data-tip="AWS cloud fundamentals"><span class="cert-logo" style="background:#ff9900">AWS</span><span class="name">AWS Certified Cloud Practitioner</span><span class="lvl">Foundational</span></div>
+            <div class="cert" data-tip="Four years hands-on: Ontology, Workshop, AIP Logic, Automate"><span class="cert-logo pltr" style="font-size:14px">P</span><span class="name">Palantir Foundry</span><span class="lvl">Certified</span></div>
+            <div class="cert" data-tip="Spark-based lakehouse fundamentals"><span class="cert-logo" style="background:#ff3621;font-size:13px">db</span><span class="name">Databricks Essentials</span><span class="lvl">Certified</span></div>
           </div>
         </div>
       </div>
