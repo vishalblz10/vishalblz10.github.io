@@ -150,12 +150,8 @@
   .tabbar button:hover{color:var(--text)}
   .tabbar button.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
   [data-theme="dark"] .tabbar button.active{background:#333336;color:#f5f5f7}
-  .panel{display:none;animation:fadeUp .4s ease;position:relative}
+  .panel{display:none;animation:fadeUp .4s ease}
   .panel.active{display:block}
-  .panel-art{position:absolute;top:-10px;right:0;width:clamp(140px,16vw,240px);color:var(--text);opacity:.05;pointer-events:none;user-select:none;z-index:0}
-  [data-theme="dark"] .panel-art{opacity:.07}
-  .panel>*:not(.panel-art){position:relative;z-index:1}
-  @media(max-width:760px){.panel-art{display:none}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
   /* ---------- experience ---------- */
@@ -268,33 +264,56 @@
       <span class="eyebrow">Senior Data Engineer</span>
       <h1>Vishal Rana</h1>
       <p class="role">Data platforms, built properly.</p>
-      <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure and Microsoft Fabric. Pipelines owned end to end, from ingestion to the screen.</p>
+      <p class="tag">Seven years turning messy, multi-source, terabyte-scale data into trusted models and dashboards — on AWS, Azure, Microsoft Fabric and Palantir Foundry. Pipelines owned end to end, from ingestion to the screen.</p>
       <div class="cta">
         <a class="btn primary" href="#main">View my work</a>
         <button class="btn ghost" onclick="openContact()" data-tip="Send me a message — no email app needed">Get in touch</button>
       </div>
     </div>
-    <svg class="hero-art" viewBox="0 0 420 360" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <!-- source databases -->
-      <ellipse cx="60" cy="52" rx="34" ry="12"/><path d="M26 52v40c0 6.6 15.2 12 34 12s34-5.4 34-12V52"/><path d="M26 72c0 6.6 15.2 12 34 12s34-5.4 34-12"/>
-      <ellipse cx="60" cy="170" rx="34" ry="12"/><path d="M26 170v40c0 6.6 15.2 12 34 12s34-5.4 34-12v-40"/><path d="M26 190c0 6.6 15.2 12 34 12s34-5.4 34-12"/>
-      <ellipse cx="60" cy="290" rx="34" ry="12"/><path d="M26 290v40c0 6.6 15.2 12 34 12s34-5.4 34-12v-40"/><path d="M26 310c0 6.6 15.2 12 34 12s34-5.4 34-12"/>
-      <!-- flow lines into transform node -->
-      <path d="M100 75 C150 85 160 140 196 160"/>
-      <path d="M100 190 L192 180"/>
-      <path d="M100 305 C150 295 160 220 196 198"/>
-      <!-- transform gear node -->
-      <rect x="196" y="146" width="66" height="66" rx="12"/>
-      <circle cx="229" cy="179" r="14"/>
-      <path d="M229 157v8M229 193v8M207 179h8M243 179h8M213.4 163.4l5.7 5.7M238.9 188.9l5.7 5.7M244.6 163.4l-5.7 5.7M219.1 188.9l-5.7 5.7"/>
-      <!-- flow to outputs -->
-      <path d="M262 165 C300 150 310 110 336 96"/>
-      <path d="M262 193 C300 208 310 248 336 262"/>
-      <!-- output: chart -->
-      <rect x="336" y="58" width="76" height="64" rx="10"/>
-      <path d="M350 106V88M368 106V74M386 106V94M404 106V80" stroke-width="4"/>
-      <!-- output: cloud/warehouse -->
-      <path d="M352 262c-9 0-16-7-16-16s7-16 16-16c1.5-11 11-19 22-19 10 0 18.5 6.7 21.3 16 .9-.1 1.8-.2 2.7-.2 9.9 0 18 8.1 18 18s-8.1 18-18 18h-46z"/>
+    <svg class="hero-art" viewBox="0 0 480 420" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- == sources column == -->
+      <!-- db 1 -->
+      <ellipse cx="52" cy="38" rx="30" ry="10"/><path d="M22 38v34c0 5.5 13.4 10 30 10s30-4.5 30-10V38"/><path d="M22 55c0 5.5 13.4 10 30 10s30-4.5 30-10"/>
+      <!-- db 2 -->
+      <ellipse cx="52" cy="128" rx="30" ry="10"/><path d="M22 128v34c0 5.5 13.4 10 30 10s30-4.5 30-10v-34"/><path d="M22 145c0 5.5 13.4 10 30 10s30-4.5 30-10"/>
+      <!-- API node -->
+      <rect x="24" y="212" width="56" height="40" rx="9"/><path d="M36 226h32M36 238h20"/>
+      <!-- file/stream node -->
+      <path d="M34 306h28l14 14v34H34v-48z"/><path d="M62 306v14h14"/><path d="M42 334h24M42 344h16"/>
+      <!-- == ingest streams (dashed) == -->
+      <g stroke-dasharray="1 9" stroke-width="3.6">
+        <path d="M88 55 C140 66 150 130 186 152"/>
+        <path d="M88 145 C130 152 148 162 184 168"/>
+        <path d="M86 232 C130 226 150 200 184 186"/>
+        <path d="M82 330 C140 322 152 226 186 200"/>
+      </g>
+      <!-- == transform engine == -->
+      <rect x="188" y="140" width="88" height="88" rx="14"/>
+      <circle cx="220" cy="172" r="13"/>
+      <path d="M220 152v7M220 185v7M200 172h7M233 172h7M205.9 157.9l5 5M229.1 181.1l5 5M234.1 157.9l-5 5M210.9 181.1l-5 5"/>
+      <circle cx="252" cy="202" r="9"/>
+      <path d="M252 188v5M252 211v5M238 202h5M261 202h5M242.1 192.1l3.6 3.6M258.3 208.3l3.6 3.6M261.9 192.1l-3.6 3.6M245.7 208.3l-3.6 3.6"/>
+      <!-- == medallion lakehouse (bronze/silver/gold) == -->
+      <path d="M318 156l26-12 26 12-26 12-26-12z"/>
+      <path d="M318 176l26 12 26-12"/>
+      <path d="M318 196l26 12 26-12"/>
+      <path d="M276 170 C296 166 302 160 316 157"/>
+      <path d="M276 198 C296 200 302 202 316 203"/>
+      <!-- == outputs == -->
+      <!-- dashboard -->
+      <rect x="376" y="42" width="92" height="72" rx="10"/>
+      <path d="M376 60h92"/><circle cx="388" cy="51" r="2.6"/><circle cx="398" cy="51" r="2.6"/>
+      <path d="M388 100V88M402 100V76M416 100V92M430 100V80M444 100V86" stroke-width="4"/>
+      <path d="M386 74c8-6 14 4 22-4s14 2 20-6 12 0 18-6" stroke-width="2.4"/>
+      <path d="M370 158 C390 140 396 120 402 116"/>
+      <!-- cloud warehouse -->
+      <path d="M400 318c-10 0-18-8-18-18s8-18 18-18c1.7-12 12-21 24-21 11 0 20.4 7.4 23.5 17.6 1-.1 2-.2 3-.2 11 0 20 9 20 20s-9 20-20 20h-50.5z"/>
+      <path d="M418 296v14M430 290v20M442 296v14" stroke-width="2.6"/>
+      <path d="M370 246 C390 262 396 276 404 284"/>
+      <!-- monitoring pulse -->
+      <rect x="196" y="290" width="132" height="52 " rx="10"/>
+      <path d="M208 316h22l8-14 12 26 9-16 6 4h32" stroke-width="2.8"/>
+      <path d="M240 236 C240 260 244 272 250 288" stroke-dasharray="1 9" stroke-width="3.6"/>
     </svg>
   </div>
 </header>
@@ -347,12 +366,6 @@
 
     <!-- ============ EXPERIENCE ============ -->
     <div class="panel active" id="panel-experience">
-      <svg class="panel-art" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="30" y="66" width="140" height="96" rx="14"/>
-        <path d="M76 66V52c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v14"/>
-        <path d="M30 108c22 12 48 18 70 18s48-6 70-18"/>
-        <path d="M92 120h16v14H92z"/>
-      </svg>
 
       <div class="job reveal">
         <div class="head">
@@ -421,12 +434,6 @@
 
     <!-- ============ PROJECTS ============ -->
     <div class="panel" id="panel-projects">
-      <svg class="panel-art" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="24" y="40" width="152" height="120" rx="12"/>
-        <path d="M24 66h152"/>
-        <circle cx="42" cy="53" r="3.5"/><circle cx="56" cy="53" r="3.5"/><circle cx="70" cy="53" r="3.5"/>
-        <path d="M58 92l-20 20 20 20M142 92l20 20-20 20M112 86l-24 72"/>
-      </svg>
       <div class="grid">
 
         <div class="card reveal" style="--pc:#8e44ad">
@@ -504,11 +511,6 @@
 
     <!-- ============ SKILLS ============ -->
     <div class="panel" id="panel-skills">
-      <svg class="panel-art" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="100" cy="100" r="30"/>
-        <path d="M100 55V38M100 162v-17M145 100h17M38 100h17M131 69l12-12M57 143l12-12M143 143l-12-12M69 69L57 57"/>
-        <circle cx="100" cy="100" r="12"/>
-      </svg>
       <div class="skills">
         <div class="skill reveal" style="--sc:#ff9900"><h4>AWS</h4>
           <div class="chips">
@@ -570,11 +572,6 @@
 
     <!-- ============ EDUCATION ============ -->
     <div class="panel" id="panel-education">
-      <svg class="panel-art" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M100 48 20 84l80 36 80-36-80-36z"/>
-        <path d="M56 102v40c0 10 20 20 44 20s44-10 44-20v-40"/>
-        <path d="M172 92v44"/><circle cx="172" cy="144" r="5"/>
-      </svg>
       <div class="edu-grid">
         <div class="edu reveal">
           <h3>Education</h3>
